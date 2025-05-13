@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="custom-cursor"></div>
+  <div id="darkModeToggle">Toggle Mode</div>
+
+  <section class="hero">
+    <h1>Hello, I'm Aditya Shankar Datta</h1>
+  </section>
+
+  <section id="about" class="reveal">
+    <h2 class="section-title">About Me</h2>
+    <div class="glass-card about-content">
+      <img src="pfp.png" alt="Profile Picture" class="profile-pic">
+      <p>I’m a creative developer who blends design and interaction into stunning experiences. I love blending playful interactions with minimal, clean design.</p>
+    </div>
+  </section>
+
+  <section id="skills" class="reveal">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills">
+      <div class="glass-card skill">HTML / CSS</div>
+      <div class="glass-card skill">JavaScript</div>
+      <div class="glass-card skill">Three.js</div>
+      <div class="glass-card skill">Framer Motion</div>
+    </div>
+  </section>
+
+  <section id="projects" class="reveal">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects">
+      <div class="glass-card project">
+        Project One
+        <div class="project-detail">A detailed overview of my first project.</div>
+      </div>
+      <div class="glass-card project">
+        Project Two
+        <div class="project-detail">An interactive experience with custom animations.</div>
+      </div>
+      <div class="glass-card project">
+        Project Three
+        <div class="project-detail">Frosted-glass design meets real-time data.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="interests" class="reveal interests-section">
+    <h2 class="section-title">My Interests</h2>
+    <div class="interests-container">
+      <div class="glass-card interest" data-bg="rly.gif">Motorsports</div>
+      <div class="glass-card interest" data-bg="coding.gif">Coding</div>
+      <div class="glass-card interest" data-bg="jorkin.gif">Gooning</div>
+      <div class="glass-card interest" data-bg="gym.gif">Working Out</div>
+      <div class="glass-card interest" data-bg="f1.gif">F1</div>
+      <div class="glass-card interest" data-bg="music.gif">Music</div>
+    </div>
+  </section>
+  
+
+  <section class="footer reveal">
+    <div class="footer-tiles">
+      <div class="footer-tile" onclick="location.href='#'">Resume</div>
+      <div class="footer-tile" onclick="location.href='#'">Socials</div>
+      <div class="footer-tile" onclick="location.href='#'">Contact</div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+  <audio id="hoverSound" src="hover.mp3" preload="auto"></audio>
+
+  <button id="music-toggle" style="
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+  ">
+    🎵 Music Off
+  </button>
+
+<script>
+const hoverSound = new Audio('hover.mp3');
+const bgMusic = new Audio('bg.mp3');
+
+hoverSound.volume = 0.4;
+bgMusic.volume = 0.3;
+bgMusic.loop = true;
+
+let musicEnabled = false;
+let audioUnlocked = false;
+
+const musicToggleBtn = document.getElementById('music-toggle');
+
+// First click on the page unlocks audio for autoplay
+document.body.addEventListener('click', () => {
+  if (!audioUnlocked) {
+    bgMusic.play().then(() => {
+      bgMusic.pause();
+      audioUnlocked = true;
+    }).catch(() => {});
+  }
+}, { once: true });
+
+musicToggleBtn.addEventListener('click', () => {
+  if (!audioUnlocked) return; // Don't do anything until audio is allowed
+
+  musicEnabled = !musicEnabled;
+  musicToggleBtn.textContent = musicEnabled ? '🎵 Music On' : '🎵 Music Off';
+
+  if (musicEnabled) {
+    bgMusic.currentTime = 0;
+    bgMusic.play().catch(err => console.log("Play error:", err));
+  } else {
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+  }
+});
+
+document.querySelectorAll('.glass-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    if (musicEnabled) {
+      hoverSound.currentTime = 0;
+      hoverSound.play().catch(() => {});
+    }
+  });
+});
+</script>
+
+
+
+
+</body>
+</html>
