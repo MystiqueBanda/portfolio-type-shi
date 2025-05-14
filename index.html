@@ -66,37 +66,26 @@
 
   <section class="footer reveal">
     <div class="footer-tiles">
-      <div class="footer-tile" onclick="location.href='#'">Resume</div>
-      <div class="footer-tile" onclick="location.href='#'">Socials</div>
-      <div class="footer-tile" onclick="location.href='#'">Contact</div>
+      <div class="footer-tile" onclick="location.href='#'">Resume(incomplete)</div>
+      <div class="footer-tile" onclick="location.href='https://mystiquebanda.github.io/my-socials/'">Socials</div>
+      <div class="footer-tile" onclick="location.href='#'">Contact(incomplete)</div>
     </div>
   </section>
 
   <script src="script.js"></script>
   <audio id="hoverSound" src="hover.mp3" preload="auto"></audio>
 
-  <button id="music-toggle" style="
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1000;
-    background: rgba(255,255,255,0.2);
-    border: none;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-  ">
-    🎵 Music Off
-  </button>
+<button id="music-toggle" class="music-toggle">
+  🎵 Music Off
+</button>
+
 
 <script>
 const hoverSound = new Audio('hover.mp3');
 const bgMusic = new Audio('bg.mp3');
 
-hoverSound.volume = 0.4;
-bgMusic.volume = 0.3;
+hoverSound.volume = 0.9;
+bgMusic.volume = 0.7;
 bgMusic.loop = true;
 
 let musicEnabled = false;
