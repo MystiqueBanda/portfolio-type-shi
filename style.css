@@ -158,6 +158,16 @@ body.dark-mode .footer {
   transform: translateY(-8px);
 }
 
+.small-footer {
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 10px;
+  background-color: #111;
+  color: #aaa;
+  font-family: 'Outfit', sans-serif;
+}
+
+
 .project:hover .project-detail {
   display: block;
 }
