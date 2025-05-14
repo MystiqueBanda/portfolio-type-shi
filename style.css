@@ -113,7 +113,7 @@ section {
 }
 
 .glass-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .glass-card:hover::before {
