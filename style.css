@@ -283,6 +283,15 @@ body {
   }
 }
 
+body.dark-mode .custom-cursor {
+  border-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .custom-cursor.hover-active {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 .music-toggle {
   position: fixed;
   top: 20px;
