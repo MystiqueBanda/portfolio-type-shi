@@ -43,13 +43,17 @@ body {
   cursor: pointer;
   backdrop-filter: blur(10px);
   z-index: 1000;
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-color);
 }
-
 
 #darkModeToggle:hover {
   transform: scale(1.05);
+  background: var(--accent);
+  color: #fff;
 }
+
 
 section {
   padding: 100px 10%;
@@ -290,5 +294,14 @@ body {
   cursor: pointer;
   backdrop-filter: blur(10px);
   z-index: 1000;
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-color);
 }
+
+.music-toggle:hover {
+  transform: scale(1.05);
+  background: var(--accent);
+  color: #fff;
+}
+
