@@ -76,7 +76,7 @@
   <section class="footer reveal">
     <div class="footer-tiles">
       <div class="footer-tile" onclick="location.href='#'">Resume(incomplete)</div>
-      <div class="footer-tile" onclick="location.href='https://mystiquebanda.github.io/my-socials/'">Socials</div>
+      <div class="footer-tile" onclick="window.open('https://mystiquebanda.github.io/my-socials/', '_blank')">Socials</div>
       <div class="footer-tile" onclick="location.href='#'">Contact(incomplete)</div>
     </div>
   </section>
@@ -137,7 +137,40 @@ document.querySelectorAll('.glass-card').forEach(card => {
 });
 </script>
 
+<script>
+  // Show game on secret key combo: Ctrl + Shift + S
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+      document.getElementById('easter-egg-game').style.display = 'block';
+    }
+  });
+</script>
 
+<footer class="small-footer">
+  <p>Made with ❤️ by Aditya Shankar Datta</p>
+  <p>🔍 There's a hidden easter egg on this site. Try to find it!</p>
+</footer>
+
+
+<div id="easter-egg-game" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:9999;">
+  <iframe src="https://playsnake.org/" style="width:100%; height:100%; border:none;"></iframe>
+  <button onclick="document.getElementById('easter-egg-game').style.display='none'" style="position:absolute; top:10px; right:10px; z-index:10000; padding:10px;">Close</button>
+</div>
+
+<script>
+  const secretCode = ['a', 'd', 'i', 't', 'y', 'a'];
+  let inputBuffer = [];
+
+  document.addEventListener('keydown', (e) => {
+    inputBuffer.push(e.key.toLowerCase());
+    if (inputBuffer.length > secretCode.length) inputBuffer.shift();
+
+    if (JSON.stringify(inputBuffer) === JSON.stringify(secretCode)) {
+      window.open('https://playsnake.org', '_blank');
+      inputBuffer = [];
+    }
+  });
+</script>
 
 
 </body>
