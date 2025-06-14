@@ -5,7 +5,6 @@
   <link rel="preload" as="image" href="coding.gif">
   <link rel="preload" as="image" href="jorkin.gif">
   <link rel="preload" as="image" href="gym.gif">
-  <link rel="preload" as="image" href="rly.gif">
   <link rel="preload" as="image" href="f1.gif">
   <link rel="preload" as="image" href="music.gif">
   <link rel="preload" as="image" href="bg.gif">
@@ -14,6 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,7 +28,7 @@
     <h2 class="section-title">About Me</h2>
     <div class="glass-card about-content">
       <img src="pfp.png" alt="Profile Picture" class="profile-pic">
-      <p>Pursuing Robotics and Automation Engineering, Automobile/Motorsports Enthusiast and an Ammateur in Web Development.</p>
+      <p>Pursuing Robotics and Automation Engineering, Automobile/Motorsports Enthusiast, and an Amateur Web Developer. (also I don’t smoke — the pfp is just for fun)</p>
     </div>
   </section>
 
@@ -36,9 +36,9 @@
     <h2 class="section-title">Skills</h2>
     <div class="skills">
       <div class="glass-card skill">HTML / CSS</div>
-      <div class="glass-card skill">Js(a bit)</div>
+      <div class="glass-card skill">JavaScript (a bit)</div>
       <div class="glass-card skill">Python</div>
-      <div class="glass-card skill">C(and a bit of c++)</div>
+      <div class="glass-card skill">C (and a bit of C++)</div>
     </div>
   </section>
 
@@ -46,16 +46,49 @@
     <h2 class="section-title">Projects</h2>
     <div class="projects">
       <div class="glass-card project">
-        Project One
-        <div class="project-detail">A detailed overview of my first project.</div>
+        Doomscroll Preventer
+        <div class="project-detail">
+          A browser extension that delays Instagram with a 5-second prompt asking if you really want to doomscroll.
+        </div>
+        <a href="https://github.com/MystiqueBanda/Doomscroll-Preventer" target="_blank" class="project-link">
+          <i class="fab fa-github"></i> View on GitHub
+        </a>
+        <a href="https://chromewebstore.google.com/detail/doomscroll-preventer/fnnkakakbbgdcoceafjgedhgdhgpmfom" target="_blank" class="project-link">
+          <img src="https://www.google.com/chrome/static/images/favicons/favicon.ico" alt="Chrome Web Store" width="16" style="vertical-align: middle; margin-right: 6px;">
+          View on Chrome Web Store
+        </a>
       </div>
+
       <div class="glass-card project">
-        Project Two
-        <div class="project-detail">Im lazy imma update ts later.</div>
+        YouTube Video Downloader
+        <div class="project-detail">
+          Python script that takes a YouTube URL and file path, auto-installs `yt-dlp`, downloads the highest-quality MP4 to that path, and sets the file creation time to script run time so it appears on top when sorted by date.
+        </div>
+        <a href="https://github.com/MystiqueBanda/youtube-video-downloader" target="_blank" class="project-link">
+          <i class="fab fa-github"></i> View on GitHub
+        </a>
       </div>
+
       <div class="glass-card project">
-        Project Three
-        <div class="project-detail">Hello huzz good morning</div>
+        To-Do-List App
+        <div class="project-detail">
+          A simple, user-friendly To-Do List app built with Python and Tkinter, featuring task add/remove and persistent storage via a text file.
+        </div>
+        <a href="https://github.com/MystiqueBanda/To-Do-List-App" target="_blank" class="project-link">
+          <i class="fab fa-github"></i> View on GitHub
+        </a>
+      </div>
+        
+      <div class="glass-card project">
+        A simple website that provides all my socials
+        <div class="project-detail">
+          This website is best viewed on laptop/pc, also i did take the help of chatgpt in making this as im not yet proficient in html, css and js
+        </div>
+        <a href="https://github.com/MystiqueBanda/youtube-video-downloader" target="_blank" class="project-link">
+          <i class="fab fa-github"></i> View on GitHub
+        </a>
+      </div>
+
       </div>
     </div>
   </section>
@@ -71,107 +104,95 @@
       <div class="glass-card interest" data-bg="music.gif">Music</div>
     </div>
   </section>
-  
 
   <section class="footer reveal">
     <div class="footer-tiles">
-      <div class="footer-tile" onclick="location.href='#'">Resume(incomplete)</div>
+      <div class="footer-tile" onclick="location.href='#'">Resume (incomplete)</div>
       <div class="footer-tile" onclick="window.open('https://mystiquebanda.github.io/my-socials/', '_blank')">Socials</div>
-      <div class="footer-tile" onclick="location.href='#'">Contact(incomplete)</div>
+      <div class="footer-tile" onclick="location.href='#'">Contact (incomplete)</div>
     </div>
   </section>
 
-  <script src="script.js"></script>
   <audio id="hoverSound" src="hover.mp3" preload="auto"></audio>
+  <button id="music-toggle" class="music-toggle">🎵 Music Off</button>
 
-<button id="music-toggle" class="music-toggle">
-  🎵 Music Off
-</button>
+  <!-- Scripts -->
+  <script src="script.js"></script>
 
+  <script>
+    const hoverSound = new Audio('hover.mp3');
+    const bgMusic = new Audio('bg.mp3');
+    hoverSound.volume = 1;
+    bgMusic.volume = 1;
+    bgMusic.loop = true;
 
-<script>
-const hoverSound = new Audio('hover.mp3');
-const bgMusic = new Audio('bg.mp3');
+    let musicEnabled = false;
+    let audioUnlocked = false;
+    const musicToggleBtn = document.getElementById('music-toggle');
 
-hoverSound.volume = 1;
-bgMusic.volume = 1;
-bgMusic.loop = true;
+    document.body.addEventListener('click', () => {
+      if (!audioUnlocked) {
+        bgMusic.play().then(() => {
+          bgMusic.pause();
+          audioUnlocked = true;
+        }).catch(() => {});
+      }
+    }, { once: true });
 
-let musicEnabled = false;
-let audioUnlocked = false;
+    musicToggleBtn.addEventListener('click', () => {
+      if (!audioUnlocked) return;
+      musicEnabled = !musicEnabled;
+      musicToggleBtn.textContent = musicEnabled ? '🎵 Music On' : '🎵 Music Off';
+      if (musicEnabled) {
+        bgMusic.currentTime = 0;
+        bgMusic.play().catch(console.error);
+      } else {
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
+      }
+    });
 
-const musicToggleBtn = document.getElementById('music-toggle');
+    document.querySelectorAll('.glass-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        if (musicEnabled) {
+          hoverSound.currentTime = 0;
+          hoverSound.play().catch(() => {});
+        }
+      });
+    });
+  </script>
 
-// First click on the page unlocks audio for autoplay
-document.body.addEventListener('click', () => {
-  if (!audioUnlocked) {
-    bgMusic.play().then(() => {
-      bgMusic.pause();
-      audioUnlocked = true;
-    }).catch(() => {});
-  }
-}, { once: true });
+  <!-- Easter Egg -->
+  <script>
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+        document.getElementById('easter-egg-game').style.display = 'block';
+      }
+    });
 
-musicToggleBtn.addEventListener('click', () => {
-  if (!audioUnlocked) return; // Don't do anything until audio is allowed
+    const secretCode = ['a', 'd', 'i', 't', 'y', 'a'];
+    let inputBuffer = [];
 
-  musicEnabled = !musicEnabled;
-  musicToggleBtn.textContent = musicEnabled ? '🎵 Music On' : '🎵 Music Off';
+    document.addEventListener('keydown', (e) => {
+      inputBuffer.push(e.key.toLowerCase());
+      if (inputBuffer.length > secretCode.length) inputBuffer.shift();
+      if (JSON.stringify(inputBuffer) === JSON.stringify(secretCode)) {
+        window.open('https://playsnake.org', '_blank');
+        inputBuffer = [];
+      }
+    });
+  </script>
 
-  if (musicEnabled) {
-    bgMusic.currentTime = 0;
-    bgMusic.play().catch(err => console.log("Play error:", err));
-  } else {
-    bgMusic.pause();
-    bgMusic.currentTime = 0;
-  }
-});
+  <footer class="small-footer">
+    <p>Made with ❤️ by Aditya Shankar Datta</p>
+    <p>🔍 There's a hidden easter egg on this site. Try to find it!</p>
+  </footer>
 
-document.querySelectorAll('.glass-card').forEach(card => {
-  card.addEventListener('mouseenter', () => {
-    if (musicEnabled) {
-      hoverSound.currentTime = 0;
-      hoverSound.play().catch(() => {});
-    }
-  });
-});
-</script>
-
-<script>
-  // Show game on secret key combo: Ctrl + Shift + S
-  document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.shiftKey && e.key === 'S') {
-      document.getElementById('easter-egg-game').style.display = 'block';
-    }
-  });
-</script>
-
-<footer class="small-footer">
-  <p>Made with ❤️ by Aditya Shankar Datta</p>
-  <p>🔍 There's a hidden easter egg on this site. Try to find it!</p>
-</footer>
-
-
-<div id="easter-egg-game" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:9999;">
-  <iframe src="https://playsnake.org/" style="width:100%; height:100%; border:none;"></iframe>
-  <button onclick="document.getElementById('easter-egg-game').style.display='none'" style="position:absolute; top:10px; right:10px; z-index:10000; padding:10px;">Close</button>
-</div>
-
-<script>
-  const secretCode = ['a', 'd', 'i', 't', 'y', 'a'];
-  let inputBuffer = [];
-
-  document.addEventListener('keydown', (e) => {
-    inputBuffer.push(e.key.toLowerCase());
-    if (inputBuffer.length > secretCode.length) inputBuffer.shift();
-
-    if (JSON.stringify(inputBuffer) === JSON.stringify(secretCode)) {
-      window.open('https://playsnake.org', '_blank');
-      inputBuffer = [];
-    }
-  });
-</script>
-
+  <div id="easter-egg-game" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:9999;">
+    <iframe src="https://playsnake.org/" style="width:100%; height:100%; border:none;"></iframe>
+    <button onclick="document.getElementById('easter-egg-game').style.display='none'" style="position:absolute; top:10px; right:10px; z-index:10000; padding:10px;">Close</button>
+  </div>
 
 </body>
 </html>
+
